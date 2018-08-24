@@ -32,3 +32,6 @@
 - http请求本来是`axios.get('http://10.18.110.107/tasktime',{params:{num:12})`
 
 - 就可以写成`axios.get('/api/tasktime',{params:{num:12})` 实现跨域
+
+
+## [nginx反向代理传送门](https://github.com/fwd001/01-record/blob/master/01-nginx.md)
