@@ -1,9 +1,10 @@
 ## 1.React 基本语法
-```js 
-  import 'React' from 'react'
-  import 'reactDom' from 'react-dom'
 
-  / 1. 创建虚拟DOM
+```js
+import 'React' from 'react'
+import 'reactDom' from 'react-dom'
+
+// 1. 创建虚拟DOM
 // react.createElement(标签名, 属性对象, ...子元素)
 let div = react.createElement('div', {
     id: 'box',
@@ -12,19 +13,19 @@ let div = react.createElement('div', {
 
 
 let ul = react.createElement('ul', {
-        className: 'list'
-    }, react.createElement('li', {
-        className: 'item'
-    }, 'li标签的内容'),
-    react.createElement('li', {
-        className: 'item'
-    }, 'li标签的内容'),
-    react.createElement('li', {
-        className: 'item'
-    }, 'li标签的内容'),
-    react.createElement('li', {
-        className: 'item'
-    }, 'li标签的内容'))
+      className: 'list'
+  }, react.createElement('li', {
+      className: 'item'
+  }, 'li标签的内容'),
+  react.createElement('li', {
+      className: 'item'
+  }, 'li标签的内容'),
+  react.createElement('li', {
+      className: 'item'
+  }, 'li标签的内容'),
+  react.createElement('li', {
+      className: 'item'
+  }, 'li标签的内容'))
 
 // 2. 将虚拟DOM渲染到页面中
 // reactDom.render(要渲染的元素, 目标位置)
@@ -49,6 +50,7 @@ reactDom.render(fm, document.getElementById('app'));
 ```
 
 ## 2.jsx 语法
+
 ```js
 // JSX语法： 可以直接在JS代码中书写HTML代码！
 // JSX语法无法直接在浏览器中运行
@@ -59,19 +61,19 @@ reactDom.render(fm, document.getElementById('app'));
 // jsx中必须注意  className和htmlFor的写法
 // js中的但标签必须 以 /> 结束
 
-
-let dv = <div id='box'>
+let dv = (
+  <div id="box">
     <h1>Shopping List for</h1>
     <ul className="list">
-        <li>Instagram</li>
-        <li>WhatsApp</li>
-        <li>
-            <label htmlFor='txt'>姓名</label>
-            <input type="text" id="txt" />
-        </li>
+      <li>Instagram</li>
+      <li>WhatsApp</li>
+      <li>
+        <label htmlFor="txt">姓名</label>
+        <input type="text" id="txt" />
+      </li>
     </ul>
-</div>
-
+  </div>
+)
 
 // JSX语法的渲染过程
 // 1. JSX语法会被babel解析成react.createElement
@@ -81,9 +83,12 @@ let dv = <div id='box'>
 
 ReactDOM.render(dv, document.getElementById('app'))
 ```
+
 ## 3.循环遍历
+
 ```js
-let dv = <div id="box">
+let dv = (
+  <div id="box">
     {/* <span>
         我叫{Math.random() > 0.5 ? "李明达" : "郭达"}
         <br />
@@ -93,27 +98,37 @@ let dv = <div id="box">
     </span> */}
 
     <ul>
-        {
-            arr.map(v => {
-                return <li className={v.brand} key={v.id}>{v.brand}: {v.price}</li>
-            })
-        }
+      {arr.map(v => {
+        return (
+          <li className={v.brand} key={v.id}>
+            {v.brand}: {v.price}
+          </li>
+        )
+      })}
     </ul>
-</div>
+  </div>
+)
 ```
 
 ## 4.写样式
 
 ```js
-let styleObj = { color: 'red', width: 200, height: 200, border: "1px solid red" };
+let styleObj = {
+  color: 'red',
+  width: 200,
+  height: 200,
+  border: '1px solid red'
+}
 
-let dv = <div>
+let dv = (
+  <div>
     <div style={styleObj}>这是一个盒子</div>
-</div>
-
+  </div>
+)
 ```
 
 ## 5.函数组件无状态组件
+
 ```js
 // React中的组件的使用方式
 // 1. 使用函数创建组件 (无状态组件)
@@ -125,27 +140,26 @@ let dv = <div>
 //4. 组件必须有个根元素
 
 function Comp() {
-    return (
-        <div>
-            <div>
-                这是组件的内容
-            </div>
+  return (
+    <div>
+      <div>这是组件的内容</div>
 
-            <div>
-                这是组件的第二部分内容
-            </div>
-        </div>
-    )
+      <div>这是组件的第二部分内容</div>
+    </div>
+  )
 }
 
-let dv = <div>
+let dv = (
+  <div>
     内容
     <Comp />
-</div>
+  </div>
+)
 ```
 
 ## 6.组件间传值
-```js 
+
+```js
 // 函数创建的组件（无状态组件） 展示的内容一般都是从外面传进来的
 // 我们只需要借助父子组件传值的方式，将数据传递给组件即可
 // 父给子传：  通过属性的方式传递， 组件中可以通过形参接收
@@ -154,25 +168,28 @@ let dv = <div>
 // 注意： props接收到的数据，都是只读的，不可以进行修改！
 
 function Login(props) {
-    console.log(props);
-    // props.func(123);
-    props.name = "刘德华"
-    return (
-        <div>
-            <h1>这是一个组件</h1>
-            <div></div>
-        </div>
-    )
+  console.log(props)
+  // props.func(123);
+  props.name = '刘德华'
+  return (
+    <div>
+      <h1>这是一个组件</h1>
+      <div />
+    </div>
+  )
 }
 
 let obj = {
-    name: "张学友",
-    age: 18,
-    sing(value) {
-        console.log("我和你吻别", value)
-    }
+  name: '张学友',
+  age: 18,
+  sing(value) {
+    console.log('我和你吻别', value)
+  }
 }
 
-reactDom.render(<Login name={obj.name} func={obj.sing}/>, document.getElementById('app'))
+reactDom.render(
+  <Login name={obj.name} func={obj.sing} />,
+  document.getElementById('app')
+)
 // reactDom.render(<Login {...obj}/>, document.getElementById('app'))
 ```
