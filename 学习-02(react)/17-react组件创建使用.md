@@ -95,6 +95,8 @@ let app = <div>
     <Hello>这是放在组件标签中的内容</Hello>
 </div>
 ```
+
+
 ## 4.处理函数中的this指向
 ```js
 class Hello extends React.Component{
