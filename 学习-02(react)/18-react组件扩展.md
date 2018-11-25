@@ -424,3 +424,33 @@ class Hello extends React.Component{
     }
 }
 ```
+
+## 6.非受控组件
+```js
+class Hello extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            msg: "这是数据"
+        }
+        this.btnClick = this.btnClick.bind(this);
+    }
+
+    btnClick() {
+        // 获取文本框的内容
+        // console.log(this.input.value)
+        this.setState({
+            msg: "改掉"
+        })
+    }
+    render() {
+        return (
+            <div>
+                <input type="text" defaultValue={this.state.msg} ref={ele => this.input = ele} />
+                
+                <button onClick={this.btnClick}>获取文本框中的内容（不是通过数据的方式）</button>
+            </div>
+        )
+    }
+}
+```
